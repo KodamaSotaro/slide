@@ -1,0 +1,9 @@
+.reveal .slide-number {
+  font-size: 32px !important;
+  line-height: 1 !important;
+}
+
+.reveal .slide-number a {
+  font-size: inherit !important;
+}
+

@@ -1,0 +1,259 @@
+---
+title: "Eye-Tracking–Based Computational Model Comparison of Reversal Maladaptation in Trait Anxiety"
+author: "Sotaro Kodama"
+format:
+  revealjs:
+    width: 1920
+    height: 1080
+    transition: none
+    slide-number: true
+    css: slide.css
+---
+
+### Fear and Anxiety
+
+* Fear and anxiety are both adaptive responses that promote threat avoidance.
+* Key difference: certainty of threat  
+
+  * Fear: an imminent and certain threat  
+  * Anxiety: an ambiguous and uncertain threat
+
+* When excessive, they impair daily functioning = anxiety disorders
+
+
+### Anxiety Disorders
+
+Anxiety disorders are psychiatric conditions characterized by excessive fear and anxiety.
+
+* Number of patients: 300 million worldwide
+* Cognitive behavioral therapy (CBT) is a major treatment; treatment resistance and relapse remain challenges
+
+→ Understanding the cognitive and behavioral mechanisms of anxiety is important
+
+--- 
+
+### Anxiety and Attentional Bias
+
+One cognitive-behavioral characteristic associated with anxiety is attentional bias.
+
+* In anxious individuals, early attention is biased toward threat-related stimuli compared with typical levels.
+* Over time, attention tends to avoid threat-related stimuli more than typical levels.
+
+::: {.columns}
+:::: {.column width="60%"}
+
+Dot-probe task
+
+* Two faces (neutral vs. threatening) are presented on the left and right, followed by a probe on one side.
+* Reaction time to the probe is measured.
+* Reaction times are shorter for probes presented on the side that was attended before probe onset.
+
+::::
+
+:::: {.column width="30%"}
+
+![](dp.png)
+
+::::
+
+:::
+
+
+Current issues
+
+* Stimuli are static, so the variability of threat intensity cannot be controlled.
+* Ecological validity is insufficient to elicit social anxiety.
+
+---
+
+### Anxiety and Maladaptation to Volatility
+
+* One cognitive-behavioral characteristic associated with anxiety is maladaptation to volatility.
+* Individuals may fail to learn how changeable the environment is, and have difficulty dissociating environmental changes from incidental noise.
+
+::: {.columns}
+
+:::: {.column width="45%"}
+
+* A study that examined the relationship with trait anxiety by orthogonally manipulating environmental volatility and stochastic fluctuations.
+* Reversal learning task: a task in which the reward rule reverses midway (e.g., in a k-armed bandit task, the mean reward reverses during the task).
+* Trait anxiety is associated with the value of lose-shiftor win-stay.
+* Tasks rely on abstract feedback, so the elicitation of anxiety is limited.
+
+::::
+
+:::: {.column width="50%"}
+
+![](g.png)
+
+::::
+
+:::
+
+* Explanations often reduce effects to learning rates (beliefs about volatility), leaving unclear how they relate to approach/avoidance toward threat-related stimuli.
+
+---
+
+### Aim
+
+We aim to explain uncertainty-related maladaptation observed in reversal learning tasks in terms of threat sensitivity, which has a clear relationship to approach and avoidance toward threat stimuli.
+
+* This is motivated by the question of which aspect is primary in anxiety-related cognition and behavior: the commonality with fear (threat avoidance) or the distinctive response to uncertainty.
+
+
+### Research Question
+
+What is the primary cause of reversal-learning maladaptation observed in individuals with high anxiety: threat sensitivity or prior beliefs about volatility?
+
+---
+
+### Hypotheses
+
+H1: Threat-sensitivity hypothesis
+
+* Cognitive-behavioral characteristics of anxiety are mainly explained by heightened threat sensitivity.
+* High threat sensitivity suppresses exploration, leading to impaired learning and consequently reversal maladaptation.
+
+H2: Volatility-prior hypothesis
+
+* Cognitive-behavioral characteristics of anxiety are mainly explained by high precision of prior beliefs about volatility.
+* Reversal maladaptation arises because learning about how changeable the world is fails to progress.
+
+We treat H1 (threat-sensitivity hypothesis) as the primary hypothesis and set H2 (volatility-prior hypothesis) as a comparison hypothesis.
+
+We design two models corresponding to the two hypotheses, and test the hypotheses via model comparison.
+
+---
+
+### Overview of the Behavioral Task
+
+Participants give a speech in a virtual online-meeting environment.
+
+::: {.columns}
+
+:::: {.column width="55%"}
+
+**Basic setup**
+
+* Participants give a brief 1-minute speech while watching a video.
+* The video displays two virtual audience faces (left/right) and a score.
+* The score-generation rule described below is not disclosed to participants.
+* Participants aim to maximize the score.
+* The virtual audience is generated artificially using face-morphing images.
+* The audience’s affective valence changes over time according to the conditions described later.
+* Gaze during the speech is measured with an eye tracker.
+
+::::
+
+:::: {.column width="40%"}
+
+![](sc.png)
+
+::::
+
+:::
+
+
+
+---
+
+### Gaze Measures
+
+* Proportion of gaze directed to each audience member
+* Latency to the first fixation
+* Speed of gaze adaptation after reversal
+* Gaze-switching frequency
+
+
+### Score Rule and Reversal
+
+* The displayed score increases or decreases depending on whether the participant looked at the audience member with higher affective valence or lower affective valence in the previous time bin.
+* Initially, looking at the higher-valence audience yields +1 point, whereas looking at the lower-valence audience yields −1 point.
+* When the rule reverses, looking at the higher-valence audience yields −1 point, whereas looking at the lower-valence audience yields +1 point.
+
+The purpose of score feedback is to encourage participants to learn the rule.
+
+---
+
+### Conditions and Predicted Gaze Behavior
+
+**Conditions**
+
+We define four conditions given by the combination of (i) the magnitude of affective-valence variability and (ii) the magnitude of reversal frequency.
+
+**Predicted gaze behavior**
+
+H1: Threat-sensitivity hypothesis
+
+* Across pre- and post-reversal periods, gaze toward the audience member who is on average more negative tends to be relatively reduced (suppressed exploration).
+* After reversal, even when the situation switches such that one should look at the lower-valence audience, the shift of gaze is delayed and score recovery is slow.  
+* Reversal maladaptation appears as learning delay due to insufficient exploration.
+
+H2: Volatility-belief hypothesis
+
+* Gaze tends to become unstable toward the audience member whose valence changes more frequently.
+* Adaptation after reversal is delayed especially under high-noise conditions, and gaze tends to become unstable.
+* Reversal maladaptation appears as unstable updating.
+
+---
+
+
+### Model
+
+We use a Bayesian inference model.
+
+* The affective valence of each virtual audience member is estimated with a Kalman filter.
+* Gaze behavior (gaze proportion in each time bin) is selected by minimizing expected free energy $G(\pi)$.
+
+$$
+G(\pi)
+=
+\underbrace{\mathbb{E}_{q(o\mid \pi)}\!\left[*\log p(o)\right]}_{\text{Risk}}
+-
+\underbrace{\mathbb{E}_{q(o\mid \pi)}\!\left[
+D_{\mathrm{KL}}\!\left(q(s\mid o,\pi)\,\|\,q(s\mid \pi)\right)
+\right]}_{\text{Information gain}}
++
+\underbrace{\mathbb{E}_{q(s\mid \pi)}\!\left[H\!\left(p(o\mid s)\right)\right]}_{\text{Ambiguity}}
+$$
+
+
+::: {.columns}
+
+:::: {.column width="55%"}
+
+* Expected free energy can be decomposed into three terms—risk, information gain, and ambiguity—capturing behavior as a trade-off among these components.
+* Threat sensitivity primarily affects the risk term via the preference parameter \(C\).
+* Beliefs about environmental volatility primarily affect the information-gain term via the transition probability matrix \(B\).
+
+::::
+
+:::: {.column width="40%"}
+
+![](net2.png){width="80%"}
+
+::::
+
+:::
+
+
+---
+
+
+#### Current Progress and Next Steps
+
+Completed
+
+* Creation of video stimuli
+
+In progress
+
+* Task design
+* Model design
+
+Not started
+
+* Online questionnaire
+* Pilot experiment
+* Main experiment
+* Data analysis
